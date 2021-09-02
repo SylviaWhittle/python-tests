@@ -15,7 +15,7 @@ def try_password(user, attempt):
 def random_string(size):
     return ''.join(random.choices(allowed_chars, k=size))
 
-def crack_length(user, max_len=32) -> int:
+def crack_length(user, max_len=64) -> int:
     trials = 1000
     times = np.empty(max_len)
     for i in range(max_len):
@@ -30,7 +30,7 @@ def crack_length(user, max_len=32) -> int:
         # this is to ensure that no random lag affects the longest response times.
         times[i] = min(i_time)
 
-
+    # Start from the end, step towards fist 
     most_likely_n = np.argsort(times)[::-1][:5]
     print(most_likely_n, times[most_likely_n] / times[most_likely_n[0]])
 
@@ -65,8 +65,8 @@ def crack_password(user, length):
                 print(old_guess)
 
 def main():
-    #print(crack_length('usr'))
-    print("Password: " + crack_password('usr', 21))
+    print(crack_length('usr'))
+    print("Password: " + crack_password('usr', 43))
 
 if __name__ == '__main__':
     main()
