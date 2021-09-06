@@ -1,7 +1,7 @@
 # Super secure server 
 
 
-password_database = {"usr": "super secure password two electric boogaloo"}
+password_database = {"usr": "super secure password"}
 
 def check_password(user, guess):
     actual = password_database[user]

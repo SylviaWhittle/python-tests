@@ -40,7 +40,7 @@ def crack_length(user, max_len=64) -> int:
 def crack_password(user, length):
     old_guess = random_string(length)
     counter = itertools.count()
-    trials = 100
+    trials = 500
     while True:
         i = next(counter) % length
         for character in allowed_chars:
@@ -65,8 +65,9 @@ def crack_password(user, length):
                 print(old_guess)
 
 def main():
-    print(crack_length('usr'))
-    print("Password: " + crack_password('usr', 43))
+    length = crack_length('usr')
+    print(length)
+    print("Password: " + crack_password('usr', length))
 
 if __name__ == '__main__':
     main()
