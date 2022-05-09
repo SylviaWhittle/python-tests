@@ -118,8 +118,8 @@ def main():
 if __name__=="__main__":
     start = time.time()
     main()
-    end = time.time() - start
-    print('process complete | elapsed time: ')
+    end = time.time()
+    print(f'process complete | elapsed time: {end - start}')
 
 
 
