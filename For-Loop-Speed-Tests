@@ -1,0 +1,32 @@
+import timeit
+import numpy as np
+
+ROWS = 1000
+COLS = 1000
+rng = np.random.default_rng()
+test = rng.integers(low=0, high=1e6, size=(ROWS, COLS))
+
+def calculate_row_quantiles_by_loop(matrix: np.array=test) -> np.array:
+    """Calculate the quantiles by row using a for loop."""
+    # Create empty array to hold the values
+    quantiles = np.zeros((matrix.shape[0], 3))
+    # Loop over rows calculating the quantiles
+    for i in range(matrix.shape[0]):
+        quantiles[i] = np.quantile(matrix[i,:], [0.25, 0.5, 0.75])
+    return quantiles
+
+def calculate_row_quantiles_by_axis(matrix: np.array=test) -> np.array:
+    """Calculate the quantiles by row using axis."""
+    return np.quantile(matrix, [0.25, 0.5, 0.75], axis=1).T
+# First we want to check we get the same results
+quantiles_by_loop = calculate_row_quantiles_by_loop()
+quantiles_by_axis = calculate_row_quantiles_by_axis()
+np.testing.assert_array_equal(quantiles_by_loop, quantiles_by_axis)
+# We now run tests timing to see how long it takes to running
+N_RUNS = 100
+results = timeit.timeit(stmt='calculate_row_quantiles_by_loop()', globals=globals(), number=N_RUNS)
+print(f'Execution time using loops is {results / N_RUNS} seconds')
+
+# Now time it using vectorised
+results = timeit.timeit(stmt='calculate_row_quantiles_by_axis()', globals=globals(), number=N_RUNS)
+print(f'Execution time using axis is {results / N_RUNS} seconds')
