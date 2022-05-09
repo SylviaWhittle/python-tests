@@ -4,6 +4,7 @@ import numpy as np
 import math
 import matplotlib
 import matplotlib.pyplot as plt
+from pathlib import Path
 
 def thomas(x, y, z, b=0.208186):
     x_prime = math.sin(y) - b * x
@@ -12,7 +13,7 @@ def thomas(x, y, z, b=0.208186):
     return x_prime, y_prime, z_prime
 
 # how many steps we propagate
-nb_iters = int(1e5)
+nb_iters = int(1e6)
 nb_particles = int(1e4)
 dt = 0.01
 
@@ -71,7 +72,8 @@ for i in range(h):
 
 im = im.astype(np.uint8)
 
-plt.imsave('thomas.png', im, dpi=600, origin='lower')
+path = Path('./GenerativeArt/')
+plt.imsave(path / 'thomas.png', im, dpi=600, origin='lower')
 
 plt.axis('off')
 plt.imshow(im)
