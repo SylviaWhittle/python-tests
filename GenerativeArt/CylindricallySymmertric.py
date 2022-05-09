@@ -106,9 +106,9 @@ def main():
 
     plt.imsave('Cylindrical.png', im, dpi=600, origin='lower')
 
-    plt.axis('off')
-    plt.imshow(im)
-    plt.show()
+    # plt.axis('off')
+    # plt.imshow(im)
+    # plt.show()
 
     color = (36, 169, 174)
 
