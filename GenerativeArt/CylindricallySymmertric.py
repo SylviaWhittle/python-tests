@@ -2,6 +2,8 @@
 import numpy as np
 import math
 import matplotlib.pyplot as plt
+import time
+
 
 def dx(x, y, z, b):
     return np.sin(y) - b * x
@@ -114,7 +116,10 @@ def main():
 
 
 if __name__=="__main__":
+    start = time.time()
     main()
+    end = time.time() - start
+    print('process complete | elapsed time: ')
 
 
 
