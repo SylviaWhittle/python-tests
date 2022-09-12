@@ -280,10 +280,29 @@ run_topostats
 * Versioning and Milestones
 * Human readable data formats
 
+## Before and After
+:::: {.columns}
+
+::: {.column width="50%"}
+![](git_graph_old.png){width=30%}
+
+:::
+::: {.column width="50%"}
+![](git_graph_new.png){width=25%}
+:::
+
+::::
 
 ## Remaining challenges and planned development
 * Balancing openness and NDA-ed information from external research partners.
 * Balancing internal team meetings with openness on Github.
 * Building a Python notebook for a more interactive getting started guide. 
 * Tutorial driven design, mentioned at RSECON 2022.
-* Publish TopoStats on PyPi
+* Publish TopoStats on PyPI
+
+
+
+
+Note from Neil's presentation
+More background for the science of TopoStats?
+Perhaps add graphs for the old and new software?
