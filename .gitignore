@@ -1,3 +1,9 @@
 **/venv/
 **/virtual_env/
 
+/ML/Shape Detection/circle
+/ML/Shape Detection/square
+/ML/Shape Detection/star
+/ML/Shape Detection/triangle
+/ML/Shape Detection/train
+/ML/Shape Detection/validate
