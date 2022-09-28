@@ -1,4 +1,5 @@
 {
+<<<<<<< Updated upstream
     "python.linting.enabled": true,
     "python.analysis.typeshedPaths": [
         ".vscode\\Pico-Stub"
@@ -8,4 +9,7 @@
     "python.analysis.extraPaths": [
         ".vscode\\Pico-Stub\\stubs"
     ]
+=======
+    "git.ignoreLimitWarning": true
+>>>>>>> Stashed changes
 }
