@@ -1,4 +1,4 @@
-#%%
+# %%
 import numpy as np
 import math
 import matplotlib.pyplot as plt
@@ -8,11 +8,14 @@ import time
 def dx(x, y, z, b):
     return np.sin(y) - b * x
 
+
 def dy(x, y, z, b):
     return np.sin(z) - b * y
 
+
 def dz(x, y, z, b):
     return np.sin(x) - b * z
+
 
 def main():
     # b = 0.208186
@@ -30,7 +33,7 @@ def main():
     zs = np.zeros(iterations)
     times = np.zeros(iterations)
 
-    h, w = 1600, 1600
+    h, w = 3000, 3000
     hist = np.zeros((h, w), dtype=int)
 
     x_min = -6
@@ -40,8 +43,7 @@ def main():
     z_max = x_max
     z_min = x_min
 
-    for i in range(iterations-1):
-
+    for i in range(iterations - 1):
         x = xs[i]
         y = ys[i]
         z = zs[i]
@@ -51,7 +53,7 @@ def main():
             y = 2 * np.random.rand() - 1
             z = 2 * np.random.rand() - 1
 
-        # RK4 
+        # RK4
         # kx1 = timestep * dx(x, y, z, b)
         # ky1 = timestep * dy(x, y, z, b)
         # kz1 = timestep * dz(x, y, z, b)
@@ -72,11 +74,11 @@ def main():
         # ys[i+1] = y + 1.0/6.0 * (ky1 + 2*ky2 + 2*ky3 + ky4)
         # zs[i+1] = z + 1.0/6.0 * (kz1 + 2*kz2 + 2*kz3 + kz4)
 
-        xs[i+1] = x + dx(x, y, z, b) * timestep
-        ys[i+1] = y + dy(x, y, z, b) * timestep
-        zs[i+1] = z + dz(x, y, z, b) * timestep
+        xs[i + 1] = x + dx(x, y, z, b) * timestep
+        ys[i + 1] = y + dy(x, y, z, b) * timestep
+        zs[i + 1] = z + dz(x, y, z, b) * timestep
 
-        times[i+1] = times[i] + timestep
+        times[i + 1] = times[i] + timestep
 
         # x_i = int( (x - x_min) * w / (x_max - x_min) )
         # y_i = int( (y - y_min) * h / (y_max - y_min) )
@@ -84,29 +86,36 @@ def main():
         # and y_i >= 0 and y_i < h):
         #     hist[y_i, x_i] += 1
 
-        z_i = int( (z - z_min) * w / (z_max - z_min) )
-        x_i = int( (x - x_min) * h / (x_max - x_min) )
-        if (z_i >= 0 and z_i < w \
-        and x_i >= 0 and x_i < h):
+        z_i = int((z - z_min) * w / (z_max - z_min))
+        x_i = int((x - x_min) * h / (x_max - x_min))
+        if z_i >= 0 and z_i < w and x_i >= 0 and x_i < h:
             hist[x_i, z_i] += 1
-    
+
     # Output
     im = np.zeros((h, w, 3), dtype=int)
+
     sens = 4e-4
     # sens = 4e-1
     color = (36, 169, 174)
-    
+
     for i in range(h):
         for j in range(w):
             val = hist[i, j]
-            r = int((1. - math.exp(-sens * val * color[0])) * 255)
-            g = int((1. - math.exp(-sens * val * color[1])) * 255)
-            b = int((1. - math.exp(-sens * val * color[2])) * 255)
+            r = int((1.0 - math.exp(-sens * val * color[0])) * 255)
+            g = int((1.0 - math.exp(-sens * val * color[1])) * 255)
+            b = int((1.0 - math.exp(-sens * val * color[2])) * 255)
             im[i, j, :] = r, g, b
+
+    # Set background to gray
+    im[im == 0] = 20
+
+    # Pad the sides with gray
+    pad = 1000
+    im = np.pad(im, ((pad, pad), (pad, pad), (0, 0)), mode="constant", constant_values=20)
 
     im = im.astype(np.uint8)
 
-    plt.imsave('Cylindrical.png', im, dpi=600, origin='lower')
+    plt.imsave("Cylindrical.png", im, dpi=600, origin="lower")
 
     # plt.axis('off')
     # plt.imshow(im)
@@ -115,12 +124,11 @@ def main():
     color = (36, 169, 174)
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
     start = time.time()
     main()
     end = time.time()
-    print(f'process complete | elapsed time: {end - start}')
-
+    print(f"process complete | elapsed time: {end - start}")
 
 
 # %%
